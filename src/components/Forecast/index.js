@@ -18,16 +18,21 @@ const Wrapper = glamorous.div({
 const TempLow = glamorous.span({
     fontWeight: "bold",
     color: "#999",
-    margin: "0 5px"
+    margin: "0 2px"
 });
 
 const TempHi = glamorous(TempLow)({
     color: "#ccc"
 });
 
+const Day = glamorous.div({
+    fontSize: "18px",
+    color: "#999"
+});
+
 export const Forecast = props => (
     <Wrapper>
-        <div>{props.day}</div>
+        <Day>{props.day}</Day>
         <div>
             <img src={`../images/${props.image}`} />
         </div>

@@ -1,4 +1,7 @@
-import { createStore } from "redux";
-import { reducer } from "./reducer";
+import { createStore, combineReducers } from "redux";
+import { reducer as weekReducer } from "./reducers/week";
 
-export default createStore(reducer);
+const rootReducer = combineReducers({
+    weekReducer
+});
+export default createStore(rootReducer);
