@@ -4,7 +4,7 @@ import { Week as WeekDumb } from "../../components/Week";
 import * as actions from "../../actions";
 
 const mapStateToProps = state => {
-    return { week: state.week }; //don't return everything
+    return { week: state.weekReducer.week }; //don't return everything
 };
 
 const mapDispatchToProps = dispatch => {
