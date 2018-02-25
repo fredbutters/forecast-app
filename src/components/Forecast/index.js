@@ -4,8 +4,8 @@ import glamorous from "glamorous";
 import { Temp } from "../Temperature";
 
 const Wrapper = glamorous.div({
-    height: "110px",
-    width: "100px",
+    height: "100px",
+    width: "90px",
     border: "1px solid transparent",
     padding: "5px",
     cursor: "pointer",
