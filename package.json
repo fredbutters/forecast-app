@@ -17,6 +17,9 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.11.6",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-observable": "^0.18.0",
+    "rxjs": "^5.5.6"
   }
 }

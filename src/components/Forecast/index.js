@@ -23,12 +23,12 @@ const Day = glamorous.div({
 });
 
 export const Forecast = props => (
-    <Wrapper>
-        <Day>{props.day}</Day>
+    <Wrapper onClick={props.handleClick}>
+        <Day>{props.date.weekday_short}</Day>
         <div>
-            <img src={`../images/${props.image}`} />
+            <img alt="weather" src={props.icon_url} />
         </div>
-        <Temp low={true}>{props.low}</Temp>
-        <Temp>{props.hi}</Temp>
+        <Temp low={true}>{props.low.fahrenheit}</Temp>
+        <Temp>{props.high.fahrenheit}</Temp>
     </Wrapper>
 );

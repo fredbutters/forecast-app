@@ -1,4 +1,3 @@
-import React from "react";
 import glamorous from "glamorous";
 
 export const Temp = glamorous.span(
