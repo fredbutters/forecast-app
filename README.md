@@ -1,12 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+Playground for react/redux
 
-Playground for react/redux with
-## included
+## modules used
 
-- react
-- redux
-- glamorous
-- redux-obseervable
-- rxjs
-- immer
+*   react
+*   redux
+*   [glamorous](https://github.com/paypal/glamorous)
+*   redux-obseervable
+*   rxjs
+*   immer
