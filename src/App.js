@@ -8,6 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createEpicMiddleware } from "redux-observable";
 
 import { Week } from "./containers/Week";
+import { Users } from "./containers/Users";
 import reducers from "./reducers/";
 import epics from "./epics";
 
@@ -28,6 +29,7 @@ const App = () => (
     <Provider store={store}>
         <Container>
             <Week />
+            <Users />
         </Container>
     </Provider>
 );

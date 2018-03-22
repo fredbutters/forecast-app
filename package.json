@@ -16,6 +16,7 @@
   "devDependencies": {
     "glamor": "^2.20.40",
     "glamorous": "^4.11.6",
+    "immer": "^1.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
