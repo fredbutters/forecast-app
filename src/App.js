@@ -28,7 +28,6 @@ const Container = glamorous.div({
 const App = () => (
     <Provider store={store}>
         <Container>
-            <Week />
             <Users />
         </Container>
     </Provider>

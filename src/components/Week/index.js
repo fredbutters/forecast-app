@@ -66,9 +66,3 @@ export class Week extends React.Component {
         );
     }
 }
-
-/*{this.props.hourly.map((item, i) => {
-                        return <div key={i}>{item}</div>;
-                    })}
-                    
-*/

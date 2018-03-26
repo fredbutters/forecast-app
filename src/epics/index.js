@@ -1,6 +1,5 @@
 import { combineEpics } from "redux-observable";
-// import { Observable } from "rxjs";
-
+import { epic as EpicUsers } from "../containers/Users";
 import { epic as EpicWeek } from "../containers/Week";
 
-export default combineEpics(EpicWeek);
+export default combineEpics(EpicWeek, EpicUsers);
