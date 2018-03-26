@@ -1,7 +1,7 @@
 export const load = payload => {
     return {
         type: "LOAD",
-        payload: payload
+        payload
     };
 };
 
@@ -14,5 +14,12 @@ export const loadStart = () => {
 export const loadEnd = () => {
     return {
         type: "LOAD_END"
+    };
+};
+
+export const selectUser = payload => {
+    return {
+        type: "SELECT_USER",
+        payload
     };
 };

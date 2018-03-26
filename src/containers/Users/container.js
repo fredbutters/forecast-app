@@ -4,7 +4,8 @@ import * as actions from "./actions";
 import { Users as UsersDumb } from "../../components/Users";
 
 const mapStateToProps = state => ({
-    users: state.users
+    allUsers: state.users,
+    selectedUser: state.selectedUser
 });
 const mapDispatchToProps = dispatch => {
     const boundActionCreators = bindActionCreators(actions, dispatch);
