@@ -15,7 +15,6 @@ import epics from "./epics";
 const rootReducer = combineReducers({
     ...reducers
 });
-// let store = createStore(rootReducer);
 
 let store = createStore(
     rootReducer,

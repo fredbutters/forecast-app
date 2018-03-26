@@ -10,3 +10,4 @@ Playground for react/redux
 *   redux-obseervable
 *   rxjs
 *   immer
+*   [font awesome](https://github.com/danawoodman/react-fontawesome/blob/master/api.md)
