@@ -1,17 +1,22 @@
 import React from "react";
 import Button from "../Button";
-import glamorous, { Div, Span, Ul, Li, A, Input } from "glamorous";
+import glamorous, { Div, Span, Ul, Ol, Li, A, Input } from "glamorous";
 import FontAwesome from "react-fontawesome";
 
-const UserListItem = glamorous.span({
-    cursor: "pointer",
-    textTransform: "capitalize",
-    paddingBottom: "5px",
-    display: "inline-block",
-    ":hover": {
-        color: "#999"
-    }
-});
+const UserListItem = glamorous.span(
+    {
+        cursor: "pointer",
+        textTransform: "capitalize",
+        paddingBottom: "5px",
+        display: "inline-block",
+        ":hover": {
+            color: "#999"
+        }
+    },
+    ({ isSelected = false }) => ({
+        color: isSelected ? "blue" : ""
+    })
+);
 
 const SelectedUserDiv = glamorous.div({
     textTransform: "capitalize"
@@ -24,20 +29,31 @@ const Loading = glamorous.div({
     paddingTop: "200px"
 });
 
+const InputCounter = glamorous.input({
+    padding: "5px"
+});
+
 export class Users extends React.Component {
+    state = {
+        selectedUserId: null
+    };
     componentWillMount() {
         this.props.loadStart();
     }
+
     handleSelectUser = user => {
         this.props.selectUser(user);
+        this.setState({
+            ...this.state,
+            selectedUserId: user.id.value
+        });
     };
     handleGetMoreUsers = () => {
         this.props.clearSelectedUser();
         this.props.getUsersStart();
     };
     handleIncrementUserCount = e => {
-        let newCount = e.target.value;
-        this.props.setUserCount(newCount);
+        this.props.setUserCount(e.target.value);
     };
 
     render() {
@@ -51,11 +67,19 @@ export class Users extends React.Component {
                     </Loading>
                 ) : (
                     <Div>
-                        <Ul>
+                        <Ol>
                             {users.map((user, i) => {
                                 return (
                                     <Li key={i}>
                                         <UserListItem
+                                            data-is-selected={
+                                                user.id.value ===
+                                                this.state.selectedUserId
+                                            }
+                                            isSelected={
+                                                user.id.value ===
+                                                this.state.selectedUserId
+                                            }
                                             onClick={() =>
                                                 this.handleSelectUser(user)
                                             }
@@ -67,18 +91,20 @@ export class Users extends React.Component {
                                     </Li>
                                 );
                             })}
-                        </Ul>
+                        </Ol>
                         <Button
                             type="secondary"
                             onClick={e => this.handleGetMoreUsers(e)}
                         >
                             Refresh Users List
                         </Button>
-                        <Input
+                        <InputCounter
                             onChange={this.handleIncrementUserCount}
                             type="number"
                             defaultValue={userCount}
                             step="1"
+                            min="1"
+                            max="20"
                         />
                     </Div>
                 )}
@@ -95,7 +121,11 @@ export class Users extends React.Component {
                                     selectedUser.name.last
                                 }`}
                             </Li>
+                            <Li>
+                                Login: <i>{selectedUser.login.username}</i>
+                            </Li>
                             <Li>Email: {selectedUser.email}</Li>
+                            <Li>{selectedUser.gender}</Li>
                         </Ul>
                     </SelectedUserDiv>
                 )}

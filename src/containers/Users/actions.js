@@ -1,19 +1,19 @@
 export const load = payload => {
     return {
-        type: "LOAD",
+        type: "LOAD_USERS",
         payload
     };
 };
 
 export const loadStart = () => {
     return {
-        type: "LOAD_START"
+        type: "LOAD_START_USERS"
     };
 };
 
 export const loadEnd = () => {
     return {
-        type: "LOAD_END"
+        type: "LOAD_END_USERS"
     };
 };
 
@@ -49,8 +49,9 @@ export const getUsersEnd = () => {
     };
 };
 
-export const setUserCount = () => {
+export const setUserCount = payload => {
     return {
-        type: "SET_USER_COUNT"
+        type: "SET_USER_COUNT",
+        payload
     };
 };

@@ -4,7 +4,7 @@ let initialState = { users: [], selectedUser: {}, userCount: 5 };
 export const reducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
-            case "LOAD":
+            case "LOAD_USERS":
                 draft.users = action.payload.response.results;
                 break;
             case "SELECT_USER":
@@ -25,20 +25,3 @@ export const reducer = (state = initialState, action) =>
         }
         return draft;
     });
-
-// export const reducer = (state = initialState, action) => {
-//     switch (action.type) {
-//         case "LOAD":
-//             return {
-//                 ...state,
-//                 users: action.payload.response.results
-//             };
-//         case "SELECT_USER":
-//             return {
-//                 ...state,
-//                 selectedUser: action.payload
-//             };
-//         default:
-//             return state;
-//     }
-// };

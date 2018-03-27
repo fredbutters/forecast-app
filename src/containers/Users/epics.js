@@ -2,11 +2,10 @@ import { Observable } from "rxjs";
 import { load, loadEnd, getUsers, getUsersEnd } from "./actions";
 
 export const loadUsers = (actions, store) => {
-    let count = store.getState().users.userCount;
     return actions
-        .filter(action => action.type === "LOAD_START")
+        .filter(action => action.type === "LOAD_START_USERS")
         .switchMap(() =>
-            usersApi(count)
+            usersApi(store)
                 .mergeMap(({ response }) => {
                     const success = Observable.of(
                         load({
@@ -21,11 +20,10 @@ export const loadUsers = (actions, store) => {
 };
 
 export const getMoreUsers = (actions, store) => {
-    let count = store.getState().users.userCount;
     return actions
         .filter(action => action.type === "GET_USERS_START")
         .switchMap(() =>
-            usersApi(count)
+            usersApi(store)
                 .mergeMap(({ response }) => {
                     const success = Observable.of(
                         getUsers({
@@ -39,7 +37,8 @@ export const getMoreUsers = (actions, store) => {
         );
 };
 
-const usersApi = (count = 5) => {
+const usersApi = store => {
+    let count = store.getState().users.userCount;
     return Observable.ajax({
         url: `https://randomuser.me/api/?results=${count}&nat=US`
     });
