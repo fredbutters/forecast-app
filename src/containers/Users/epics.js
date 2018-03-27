@@ -1,13 +1,12 @@
 import { Observable } from "rxjs";
-import { loadStart, load, loadEnd } from "./actions";
+import { load, loadEnd, getUsers, getUsersEnd } from "./actions";
 
-export const epic = (actions, store) => {
+export const loadUsers = (actions, store) => {
+    let count = store.getState().users.userCount;
     return actions
         .filter(action => action.type === "LOAD_START")
         .switchMap(() =>
-            Observable.ajax({
-                url: "https://randomuser.me/api/?results=5&nat=US"
-            })
+            usersApi(count)
                 .mergeMap(({ response }) => {
                     const success = Observable.of(
                         load({
@@ -19,4 +18,29 @@ export const epic = (actions, store) => {
                 })
                 .catch(err => Observable.of(loadEnd()))
         );
+};
+
+export const getMoreUsers = (actions, store) => {
+    let count = store.getState().users.userCount;
+    return actions
+        .filter(action => action.type === "GET_USERS_START")
+        .switchMap(() =>
+            usersApi(count)
+                .mergeMap(({ response }) => {
+                    const success = Observable.of(
+                        getUsers({
+                            response
+                        })
+                    );
+                    const end = Observable.of(getUsersEnd());
+                    return success.concat(end);
+                })
+                .catch(err => Observable.of(getUsersEnd()))
+        );
+};
+
+const usersApi = (count = 5) => {
+    return Observable.ajax({
+        url: `https://randomuser.me/api/?results=${count}&nat=US`
+    });
 };

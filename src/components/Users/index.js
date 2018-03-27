@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Button";
-import glamorous, { Div, Span, Ul, Li, A } from "glamorous";
+import glamorous, { Div, Span, Ul, Li, A, Input } from "glamorous";
 import FontAwesome from "react-fontawesome";
 
 const UserListItem = glamorous.span({
@@ -32,16 +32,22 @@ export class Users extends React.Component {
         this.props.selectUser(user);
     };
     handleGetMoreUsers = () => {
-        console.log("get more!");
+        this.props.clearSelectedUser();
+        this.props.getUsersStart();
     };
+    handleIncrementUserCount = e => {
+        let newCount = e.target.value;
+        this.props.setUserCount(newCount);
+    };
+
     render() {
-        let { users, selectedUser } = this.props.allUsers;
+        let { users, selectedUser, userCount } = this.props.allUsers;
 
         return (
             <Div>
                 {!users.length ? (
                     <Loading>
-                        <FontAwesome name="spinner" spin="true" />
+                        <FontAwesome name="spinner" spin={true} />
                     </Loading>
                 ) : (
                     <Div>
@@ -64,31 +70,34 @@ export class Users extends React.Component {
                         </Ul>
                         <Button
                             type="secondary"
-                            onClick={() => this.handleGetMoreUsers()}
+                            onClick={e => this.handleGetMoreUsers(e)}
                         >
-                            Get More Users
+                            Refresh Users List
                         </Button>
+                        <Input
+                            onChange={this.handleIncrementUserCount}
+                            type="number"
+                            defaultValue={userCount}
+                            step="1"
+                        />
                     </Div>
                 )}
                 {!Object.keys(selectedUser).length ? null : (
-                    <Span>
-                        You selected:
-                        <SelectedUserDiv>
-                            <Ul>
-                                <Li>
-                                    <img src={selectedUser.picture.large} />
-                                </Li>
-                                <Li>
-                                    {" "}
-                                    Name:{" "}
-                                    {`${selectedUser.name.first} ${
-                                        selectedUser.name.last
-                                    }`}
-                                </Li>
-                                <Li>Email: {selectedUser.email}</Li>
-                            </Ul>
-                        </SelectedUserDiv>
-                    </Span>
+                    <SelectedUserDiv>
+                        <Ul>
+                            <Li>
+                                <img src={selectedUser.picture.large} />
+                            </Li>
+                            <Li>
+                                {" "}
+                                Name:{" "}
+                                {`${selectedUser.name.first} ${
+                                    selectedUser.name.last
+                                }`}
+                            </Li>
+                            <Li>Email: {selectedUser.email}</Li>
+                        </Ul>
+                    </SelectedUserDiv>
                 )}
             </Div>
         );

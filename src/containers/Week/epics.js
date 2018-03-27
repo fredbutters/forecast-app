@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { load, loadStart, loadEnd } from "./actions";
+import { load, loadEnd } from "./actions";
 
 export const epic = (actions, store) =>
     actions.filter(action => action.type === "LOAD_START").switchMap(() =>
