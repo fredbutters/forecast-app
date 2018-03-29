@@ -7,7 +7,8 @@ Playground for react/redux
 *   react
 *   redux
 *   [glamorous](https://github.com/paypal/glamorous)
-*   redux-obseervable
-*   rxjs
-*   immer
+*   [glamorous-grid](http://www.dylanmozlowski.com/glamorous-grid/)
+*   [redux-obseervable](https://github.com/redux-observable/redux-observable)
+*   [rxjs](https://github.com/ReactiveX/rxjs)
+*   [immer](https://github.com/mweststrate/immer)
 *   [font awesome](https://github.com/danawoodman/react-fontawesome/blob/master/api.md)
