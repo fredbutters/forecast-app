@@ -3,29 +3,6 @@ let colorSecondary = "#ff8a00",
     colorPrimary = "#049204",
     colorPrimaryHover = "#4f9900";
 
-let buttons = {
-    secondary: [{ color: "#ff8a00" }, { colorHover: "#cc6e00" }],
-    primary: [{ color: "#049204" }, { colorHover: "#4f9900" }]
-};
-
-// const getButton = theme => {
-//     return {
-//         backgroundImage: `linear-gradient(to bottom, ${
-//             theme[0].color
-//         } 0%, #036803 100%)`,
-//         color: "#fff",
-//         backgroundColor: theme[0].color,
-//         border: "2px solid transparent",
-//         ":hover": {
-//             backgroundImage: `linear-gradient(to bottom, ${
-//                 theme[0].color
-//             } 0%, #4f9900 100%)`,
-//             borderColor: colorPrimaryHover,
-//             backgroundColor: colorPrimaryHover
-//         }
-//     };
-// };
-
 export const theme = {
     color: {
         secondary: colorSecondary,

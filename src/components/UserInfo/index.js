@@ -1,19 +1,27 @@
 import React from "react";
-import glamorous, { Div, Ul, Li } from "glamorous";
+import glamorous, { Div, Ul, Li, H3 } from "glamorous";
+
+const LiCap = glamorous.li({
+    textTransform: "capitalize"
+});
 
 const UserInfo = ({ user }) => {
+    let dobDate = new Date(user.dob);
+    let dob = dobDate.toLocaleDateString();
     return (
-        <Div css={{ textTransform: "capitalize" }}>
+        <Div>
+            <H3 css={{ textTransform: "capitalize" }}>{`${user.name.first} ${
+                user.name.last
+            }`}</H3>
+            <img src={user.picture.large} />
             <Ul>
                 <Li>
-                    <img src={user.picture.large} />
-                </Li>
-                <Li> Name: {`${user.name.first} ${user.name.last}`}</Li>
-                <Li>
-                    Login: <i>{user.login.username}</i>
+                    Username:<i>{user.login.username}</i>
                 </Li>
                 <Li>Email: {user.email}</Li>
-                <Li>{user.gender}</Li>
+                <LiCap>{`${user.location.city}, ${user.location.state}`}</LiCap>
+                <LiCap>{user.gender}</LiCap>
+                <Li>DOB: {dob}</Li>
             </Ul>
         </Div>
     );

@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "../Button";
 import { theme } from "../../Providers/theme";
-import glamorous, { Div, Span, Ul, Ol, Li, A, Input } from "glamorous";
+import glamorous, { Div, Span, Ul, Ol, Li, A, Input, H3 } from "glamorous";
+import { Container, Row, Col } from "glamorous-grid";
 import { InputCounter } from "../InputCounter";
 import UserInfo from "../UserInfo";
 import { Loading as WithLoader } from "../Loading";
@@ -63,68 +64,59 @@ export class Users extends React.Component {
 
     render() {
         let { users, selectedUser, userCount } = this.props.allUsers;
-        let buttonStyles = {
-            backgroundImage:
-                "linear-gradient(to bottom, #ff8a00 0%, #e57a00 100%)",
-            color: "#fff",
-            borderColor: "#ff8a00",
-            backgroundColor: "#ff8a00",
-            border: "1px solid transparent",
-            ":hover": {
-                backgroundImage:
-                    "linear-gradient(to bottom, #cc6e00 0%, #b25f00 100%)",
-                borderColor: "#cc6e00",
-                backgroundColor: "#cc6e00"
-            }
-        };
 
         return (
-            <Div>
-                {!users.length ? (
-                    <LoadingSpinner />
-                ) : (
-                    <Div>
-                        <Ol>
-                            {users.map((user, i) => {
-                                return (
-                                    <Li key={i}>
-                                        <UserListItem
-                                            isSelected={
-                                                user.id.value ===
-                                                this.state.selectedUserId
-                                            }
-                                            onClick={() =>
-                                                this.handleSelectUser(user)
-                                            }
-                                        >
-                                            {`${user.name.title} ${
-                                                user.name.first
-                                            } ${user.name.last}`}
-                                        </UserListItem>
-                                    </Li>
-                                );
-                            })}
-                        </Ol>
-                        <InputCounter
-                            wrapperCss={{ marginBottom: "10px" }}
-                            buttonCss={theme.button.primary}
-                            handleIncrement={() => this.handleIncrement()}
-                            handleDecrement={() => this.handleDecrement()}
-                            handleChange={e => this.handleChange(e)}
-                            count={userCount}
-                        />
-                        <Button
-                            type="secondary"
-                            onClick={e => this.handleGetMoreUsers(e)}
-                        >
-                            Refresh Users List
-                        </Button>
-                    </Div>
-                )}
-                {!Object.keys(selectedUser).length ? null : (
-                    <UserInfo user={selectedUser} />
-                )}
-            </Div>
+            <Container>
+                <Row>
+                    {!users.length ? (
+                        <LoadingSpinner />
+                    ) : (
+                        <Col>
+                            <H3>Select a User...</H3>
+                            <Ol>
+                                {users.map((user, i) => {
+                                    return (
+                                        <Li key={i}>
+                                            <UserListItem
+                                                isSelected={
+                                                    user.id.value ===
+                                                    this.state.selectedUserId
+                                                }
+                                                onClick={() =>
+                                                    this.handleSelectUser(user)
+                                                }
+                                            >
+                                                {`${user.name.title} ${
+                                                    user.name.first
+                                                } ${user.name.last}`}
+                                            </UserListItem>
+                                        </Li>
+                                    );
+                                })}
+                            </Ol>
+                            <InputCounter
+                                wrapperCss={{ marginBottom: "10px" }}
+                                buttonCss={theme.button.primary}
+                                handleIncrement={() => this.handleIncrement()}
+                                handleDecrement={() => this.handleDecrement()}
+                                handleChange={e => this.handleChange(e)}
+                                count={userCount}
+                            />
+                            <Button
+                                type="secondary"
+                                onClick={e => this.handleGetMoreUsers(e)}
+                            >
+                                Refresh Users List
+                            </Button>
+                        </Col>
+                    )}
+                    {!Object.keys(selectedUser).length ? null : (
+                        <Col>
+                            <UserInfo user={selectedUser} />
+                        </Col>
+                    )}
+                </Row>
+            </Container>
         );
     }
 }

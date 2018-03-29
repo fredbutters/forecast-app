@@ -21,14 +21,14 @@ let store = createStore(
     composeWithDevTools(applyMiddleware(createEpicMiddleware(epics)))
 );
 
-const Container = glamorous.div({
+const Wrapper = glamorous.div({
     padding: "15px"
 });
 const App = () => (
     <Provider store={store}>
-        <Container>
+        <Wrapper>
             <Users />
-        </Container>
+        </Wrapper>
     </Provider>
 );
 

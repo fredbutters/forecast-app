@@ -10,7 +10,7 @@ export const InputCounter = props => {
     return (
         <Div css={props.wrapperCss}>
             <Input
-                css={{ padding: "5px" }}
+                css={{ padding: "5px", width: "100px" }}
                 type="text"
                 defaultValue={props.count}
                 value={props.count}
