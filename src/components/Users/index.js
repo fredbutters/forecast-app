@@ -1,7 +1,11 @@
 import React from "react";
 import Button from "../Button";
+import { theme } from "../../Providers/theme";
 import glamorous, { Div, Span, Ul, Ol, Li, A, Input } from "glamorous";
-import FontAwesome from "react-fontawesome";
+import { InputCounter } from "../InputCounter";
+import UserInfo from "../UserInfo";
+import { Loading as WithLoader } from "../Loading";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 const UserListItem = glamorous.span(
     {
@@ -18,21 +22,6 @@ const UserListItem = glamorous.span(
     })
 );
 
-const SelectedUserDiv = glamorous.div({
-    textTransform: "capitalize"
-});
-
-const Loading = glamorous.div({
-    height: "400px",
-    textAlign: "center",
-    fontSize: "42px",
-    paddingTop: "200px"
-});
-
-const InputCounter = glamorous.input({
-    padding: "5px"
-});
-
 export class Users extends React.Component {
     state = {
         selectedUserId: null
@@ -48,23 +37,51 @@ export class Users extends React.Component {
             selectedUserId: user.id.value
         });
     };
+
     handleGetMoreUsers = () => {
         this.props.clearSelectedUser();
         this.props.getUsersStart();
     };
-    handleIncrementUserCount = e => {
-        this.props.setUserCount(e.target.value);
+
+    handleIncrement = () => {
+        let count = this.props.allUsers.userCount;
+        let newValue = count >= 0 ? count : 0;
+        newValue++;
+        this.props.setUserCount(newValue);
     };
+
+    handleDecrement = () => {
+        let count = this.props.allUsers.userCount;
+        let newValue = count >= 0 ? count : 0;
+        newValue--;
+        this.props.setUserCount(newValue);
+    };
+
+    handleChange(e) {
+        this.props.setUserCount(e.target.value);
+    }
 
     render() {
         let { users, selectedUser, userCount } = this.props.allUsers;
+        let buttonStyles = {
+            backgroundImage:
+                "linear-gradient(to bottom, #ff8a00 0%, #e57a00 100%)",
+            color: "#fff",
+            borderColor: "#ff8a00",
+            backgroundColor: "#ff8a00",
+            border: "1px solid transparent",
+            ":hover": {
+                backgroundImage:
+                    "linear-gradient(to bottom, #cc6e00 0%, #b25f00 100%)",
+                borderColor: "#cc6e00",
+                backgroundColor: "#cc6e00"
+            }
+        };
 
         return (
             <Div>
                 {!users.length ? (
-                    <Loading>
-                        <FontAwesome name="spinner" spin={true} />
-                    </Loading>
+                    <LoadingSpinner />
                 ) : (
                     <Div>
                         <Ol>
@@ -72,10 +89,6 @@ export class Users extends React.Component {
                                 return (
                                     <Li key={i}>
                                         <UserListItem
-                                            data-is-selected={
-                                                user.id.value ===
-                                                this.state.selectedUserId
-                                            }
                                             isSelected={
                                                 user.id.value ===
                                                 this.state.selectedUserId
@@ -92,42 +105,24 @@ export class Users extends React.Component {
                                 );
                             })}
                         </Ol>
+                        <InputCounter
+                            wrapperCss={{ marginBottom: "10px" }}
+                            buttonCss={theme.button.primary}
+                            handleIncrement={() => this.handleIncrement()}
+                            handleDecrement={() => this.handleDecrement()}
+                            handleChange={e => this.handleChange(e)}
+                            count={userCount}
+                        />
                         <Button
                             type="secondary"
                             onClick={e => this.handleGetMoreUsers(e)}
                         >
                             Refresh Users List
                         </Button>
-                        <InputCounter
-                            onChange={this.handleIncrementUserCount}
-                            type="number"
-                            defaultValue={userCount}
-                            step="1"
-                            min="1"
-                            max="20"
-                        />
                     </Div>
                 )}
                 {!Object.keys(selectedUser).length ? null : (
-                    <SelectedUserDiv>
-                        <Ul>
-                            <Li>
-                                <img src={selectedUser.picture.large} />
-                            </Li>
-                            <Li>
-                                {" "}
-                                Name:{" "}
-                                {`${selectedUser.name.first} ${
-                                    selectedUser.name.last
-                                }`}
-                            </Li>
-                            <Li>
-                                Login: <i>{selectedUser.login.username}</i>
-                            </Li>
-                            <Li>Email: {selectedUser.email}</Li>
-                            <Li>{selectedUser.gender}</Li>
-                        </Ul>
-                    </SelectedUserDiv>
+                    <UserInfo user={selectedUser} />
                 )}
             </Div>
         );

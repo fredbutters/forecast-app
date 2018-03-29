@@ -1,11 +1,19 @@
 import produce from "immer";
 
-let initialState = { users: [], selectedUser: {}, userCount: 5 };
+let initialState = {
+    users: [],
+    selectedUser: {},
+    userCount: 5,
+    isLoading: true
+};
 export const reducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
             case "LOAD_USERS":
                 draft.users = action.payload.response.results;
+                break;
+            case "LOAD_END_USERS":
+                draft.isLoading = false;
                 break;
             case "SELECT_USER":
                 draft.selectedUser = action.payload;

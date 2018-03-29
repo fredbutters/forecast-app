@@ -7,7 +7,8 @@ export const load = payload => {
 
 export const loadStart = () => {
     return {
-        type: "LOAD_START_USERS"
+        type: "LOAD_START_USERS",
+        isLoading: true
     };
 };
 
