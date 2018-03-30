@@ -1,14 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-// import store from "./store";
+
 import glamorous from "glamorous";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createEpicMiddleware } from "redux-observable";
 
 // import { Week } from "./containers/Week";
-import { Users } from "./containers/Users";
+// import { Users } from "./containers/Users";
+import { MyRouter as Router } from "./Router";
 import reducers from "./reducers/";
 import epics from "./epics";
 
@@ -27,7 +28,7 @@ const Wrapper = glamorous.div({
 const App = () => (
     <Provider store={store}>
         <Wrapper>
-            <Users />
+            <Router />
         </Wrapper>
     </Provider>
 );
