@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Ul, Li, Div } from "glamorous";
 import { Users } from "./containers/Users";
 import { Home } from "./containers/Home";
+import { Reddit } from "./containers/Reddit";
 import { Week } from "./containers/Week";
 
 export const MyRouter = () => (
@@ -16,11 +17,15 @@ export const MyRouter = () => (
                     <Link to="/users">Users</Link>
                 </Li>
                 <Li>
+                    <Link to="/reddit">Reddit</Link>
+                </Li>
+                <Li>
                     <Link to="/week">Forecast</Link>
                 </Li>
             </Ul>
             <Route exact path="/" component={Home} />
             <Route path="/users" component={Users} />
+            <Route path="/reddit" component={Reddit} />
             <Route path="/week" component={Week} />
         </Div>
     </Router>
