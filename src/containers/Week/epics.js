@@ -6,9 +6,9 @@ export const epic = (actions, store) =>
         Observable.ajax({
             url:
                 "http://api.wunderground.com/api/6af66ddeedda3e8d/forecast/q/CA/Irvine.json",
-            headers: {
-                "Content-Type":
-                    "application/x-www-form-urlencoded; charset=UTF-8"
+            crossDomain: true,
+            createXHR: function() {
+                return new XMLHttpRequest();
             }
         })
             .mergeMap(({ response }) => {

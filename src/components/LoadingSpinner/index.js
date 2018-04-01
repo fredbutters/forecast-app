@@ -1,16 +1,11 @@
 import React from "react";
-import glamorous from "glamorous";
+import glamorous, { Span } from "glamorous";
 import FontAwesome from "react-fontawesome";
 
-const Loading = glamorous.div({
-    height: "400px",
-    textAlign: "center",
-    fontSize: "42px",
-    paddingTop: "200px"
-});
+const Loading = glamorous.div({});
 
-export const LoadingSpinner = () => (
-    <Loading>
+export const LoadingSpinner = props => (
+    <Span css={props.css}>
         <FontAwesome name="spinner" spin={true} />
-    </Loading>
+    </Span>
 );

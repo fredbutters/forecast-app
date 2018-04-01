@@ -17,3 +17,22 @@ export const loadEnd = () => {
         type: "LOAD_END_REDDIT"
     };
 };
+
+// export const getPosts = payload => {
+//     return {
+//         type: "GET_POSTS",
+//         payload
+//     };
+// };
+
+// export const getPostsStart = () => {
+//     return {
+//         type: "GET_POSTS_START"
+//     };
+// };
+
+// export const getPostsEnd = () => {
+//     return {
+//         type: "GET_POSTS_END"
+//     };
+// };

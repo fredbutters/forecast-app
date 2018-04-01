@@ -69,7 +69,14 @@ export class Users extends React.Component {
             <Container>
                 <Row>
                     {!users.length ? (
-                        <LoadingSpinner />
+                        <LoadingSpinner
+                            css={{
+                                height: "400px",
+                                textAlign: "center",
+                                fontSize: "42px",
+                                paddingTop: "200px"
+                            }}
+                        />
                     ) : (
                         <Col>
                             <H3>Select a User...</H3>
