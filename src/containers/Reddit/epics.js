@@ -9,8 +9,7 @@ export const getPosts = (actions, store) => {
             let { subRedditText } = store.getState().reddit;
 
             return Observable.ajax({
-                url: `https://www.reddit.com/r/${subRedditText ||
-                    "reactjs"}.json`,
+                url: `https://www.reddit.com/r/${subRedditText}.json`,
                 crossDomain: true,
                 createXHR: function() {
                     return new XMLHttpRequest();
@@ -22,9 +21,12 @@ export const getPosts = (actions, store) => {
                     const end = Observable.of(loadEnd());
                     return success.concat(end);
                 })
-                .catch(err => {
-                    console.log(err);
-                    Observable.of(loadError(err));
+                .catch(error => {
+                    let msg =
+                        error.status === 403 || error.status === 404
+                            ? `No subreddit found for: ${subRedditText}`
+                            : error.message;
+                    return Observable.of(loadError(msg));
                 });
         });
 };

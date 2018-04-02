@@ -1,8 +1,18 @@
 import React from "react";
-import glamorous, { Div, H2, Ul, Li, Input } from "glamorous";
+import glamorous, { Div, A, H2, Ul, Li, Input } from "glamorous";
 import { Container, Row, Col } from "glamorous-grid";
 import { LoadingSpinner } from "../LoadingSpinner";
 import Button from "../Button";
+
+const ErrorMessage = glamorous.div(
+    {
+        color: "red",
+        fontStyle: "italic"
+    },
+    ({ isVisible = false }) => ({
+        display: isVisible ? "block" : "none"
+    })
+);
 
 export class Reddit extends React.Component {
     state = {
@@ -21,7 +31,7 @@ export class Reddit extends React.Component {
     };
 
     render() {
-        let { data, isLoading } = this.props;
+        let { data, isLoading, isError } = this.props;
         return (
             <Container>
                 <Row>
@@ -46,12 +56,19 @@ export class Reddit extends React.Component {
                             css={{ fontSize: "32px" }}
                             isVisible={isLoading}
                         />
+                        <ErrorMessage isVisible={isError}>
+                            {this.props.errorMessage}
+                        </ErrorMessage>
                         {!data.length ? null : (
                             <Div>
                                 <H2>{`/r/${this.props.subRedditText}`}</H2>
                                 <Ul>
                                     {data.map(post => (
-                                        <Li key={post.id}>{post.title}</Li>
+                                        <Li key={post.id}>
+                                            <A href={post.url} target="_blank">
+                                                {post.title}
+                                            </A>
+                                        </Li>
                                     ))}
                                 </Ul>
                             </Div>

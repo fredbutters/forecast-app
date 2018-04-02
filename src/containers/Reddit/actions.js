@@ -18,10 +18,10 @@ export const loadEnd = () => {
     };
 };
 
-export const loadError = err => {
+export const loadError = error => {
     return {
         type: "LOAD_ERROR_REDDIT",
-        err
+        error
     };
 };
 export const setSubRedditText = payload => {

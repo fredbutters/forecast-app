@@ -1,12 +1,19 @@
 import produce from "immer";
 
-let initialState = { data: {}, isLoading: false, subRedditText: "" };
+let initialState = {
+    data: {},
+    isLoading: false,
+    subRedditText: "",
+    errorMessage: "",
+    isError: false
+};
 
 export const reducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
             case "LOAD_START_REDDIT":
                 draft.isLoading = true;
+                draft.isError = false;
                 draft.data = {};
                 break;
             case "LOAD_REDDIT":
@@ -16,10 +23,12 @@ export const reducer = (state = initialState, action) =>
                 draft.isLoading = false;
                 break;
             case "LOAD_ERROR_REDDIT":
-                draft.error = action.error;
+                draft.isError = true;
+                draft.isLoading = false;
+                draft.errorMessage = action.error;
                 break;
             case "SET_SUBREDDIT_TEXT":
-                draft.subRedditText = action.payload;
+                draft.subRedditText = action.payload || "reactjs";
                 break;
         }
         return draft;

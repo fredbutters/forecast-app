@@ -6,7 +6,9 @@ import { Reddit as RedditDumb } from "../../components/Reddit";
 const mapStateToProps = state => ({
     data: state.reddit.data,
     isLoading: state.reddit.isLoading,
-    subRedditText: state.reddit.subRedditText
+    subRedditText: state.reddit.subRedditText,
+    errorMessage: state.reddit.errorMessage,
+    isError: state.reddit.isError
 });
 
 const mapDispatchToProps = dispatch => {

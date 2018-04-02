@@ -29,7 +29,8 @@ const App = () => (
     <Provider store={store}>
         <Wrapper
             css={{
-                backgroundColor: "lightblue"
+                backgroundColor: "lightblue",
+                minHeight: "400px"
             }}
         >
             <Router />
