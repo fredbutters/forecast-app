@@ -4,7 +4,9 @@ import * as actions from "./actions";
 import { Reddit as RedditDumb } from "../../components/Reddit";
 
 const mapStateToProps = state => ({
-    ...state.reddit
+    data: state.reddit.data,
+    isLoading: state.reddit.isLoading,
+    subRedditText: state.reddit.subRedditText
 });
 
 const mapDispatchToProps = dispatch => {

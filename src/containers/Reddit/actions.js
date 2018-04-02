@@ -18,6 +18,19 @@ export const loadEnd = () => {
     };
 };
 
+export const loadError = err => {
+    return {
+        type: "LOAD_ERROR_REDDIT",
+        err
+    };
+};
+export const setSubRedditText = payload => {
+    return {
+        type: "SET_SUBREDDIT_TEXT",
+        payload
+    };
+};
+
 // export const getPosts = payload => {
 //     return {
 //         type: "GET_POSTS",

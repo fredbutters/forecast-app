@@ -1,14 +1,16 @@
 import { Observable } from "rxjs";
-import { load, loadStart, loadEnd } from "./actions";
+import { load, loadStart, loadEnd, loadError } from "./actions";
 
 export const getPosts = (actions, store) => {
     return actions
         .filter(action => action.type === "LOAD_START_REDDIT")
         .switchMap(() => {
-            let subreddit = "reactjs";
-            // let subreddit = store.getState().reddit.posts || "reactjs";
+            // let subreddit = "reactjs";
+            let { subRedditText } = store.getState().reddit;
+
             return Observable.ajax({
-                url: `https://www.reddit.com/r/${subreddit}.json`,
+                url: `https://www.reddit.com/r/${subRedditText ||
+                    "reactjs"}.json`,
                 crossDomain: true,
                 createXHR: function() {
                     return new XMLHttpRequest();
@@ -22,7 +24,7 @@ export const getPosts = (actions, store) => {
                 })
                 .catch(err => {
                     console.log(err);
-                    Observable.of(loadEnd());
+                    Observable.of(loadError(err));
                 });
         });
 };

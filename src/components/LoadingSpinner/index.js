@@ -2,10 +2,12 @@ import React from "react";
 import glamorous, { Span } from "glamorous";
 import FontAwesome from "react-fontawesome";
 
-const Loading = glamorous.div({});
+const Loading = glamorous.span({}, ({ isVisible }) => ({
+    display: isVisible ? "block" : "none"
+}));
 
 export const LoadingSpinner = props => (
-    <Span css={props.css}>
+    <Loading css={props.css} isVisible={props.isVisible}>
         <FontAwesome name="spinner" spin={true} />
-    </Span>
+    </Loading>
 );

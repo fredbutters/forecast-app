@@ -27,7 +27,11 @@ const Wrapper = glamorous.div({
 });
 const App = () => (
     <Provider store={store}>
-        <Wrapper>
+        <Wrapper
+            css={{
+                backgroundColor: "lightblue"
+            }}
+        >
             <Router />
         </Wrapper>
     </Provider>
