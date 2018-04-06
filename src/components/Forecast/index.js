@@ -1,34 +1,67 @@
 import React from "react";
 import glamorous from "glamorous";
+import { ForecastItem } from "../ForecastItem";
+import Button from "../Button";
 
-import { Temp } from "../Temperature";
+const Hourly = glamorous.div({}, ({ isVisible = false }) => ({
+    display: isVisible ? "block" : "none"
+}));
 
-const Wrapper = glamorous.div({
-    height: "100px",
-    width: "90px",
-    border: "1px solid transparent",
-    padding: "5px",
-    cursor: "pointer",
-    display: "inline-block",
-    textAlign: "center",
-    "&:hover": {
-        border: "1px solid #ddd",
-        backgroundColor: "#eee"
+export class Forecast extends React.Component {
+    state = {
+        isHourlyVisible: false,
+        hourly: []
+    };
+    componentWillMount = () => {
+        this.props.loadStart();
+    };
+
+    showHourly = day => {
+        this.setState(prevState => ({
+            ...prevState,
+            isHourlyVisible: true,
+            hourly: this.props.hourly
+        }));
+    };
+
+    hideHourly = e => {
+        e.preventDefault();
+        this.setState(prevState => ({
+            ...prevState,
+            isHourlyVisible: false,
+            hourly: []
+        }));
+    };
+
+    render() {
+        let { weeklyForecast } = this.props.weeklyForecast;
+        return (
+            <div>
+                {!weeklyForecast.length ? null : (
+                    <div>
+                        {weeklyForecast.map((item, i) => {
+                            return (
+                                <ForecastItem
+                                    {...item}
+                                    key={i}
+                                    handleClick={() =>
+                                        this.showHourly(item.date.day)
+                                    }
+                                />
+                            );
+                        })}
+                        <Hourly isVisible={this.state.isHourlyVisible}>
+                            Hourly stuff
+                            {this.state.hourly.map((item, i) => {
+                                return <div key={i}>test</div>;
+                            })}
+                            <Button type="secondary" onClick={this.hideHourly}>
+                                hide
+                            </Button>
+                        </Hourly>
+                    </div>
+                )}
+            </div>
+        );
     }
-});
-
-const Day = glamorous.div({
-    fontSize: "18px",
-    color: "#999"
-});
-
-export const Forecast = props => (
-    <Wrapper onClick={props.handleClick}>
-        <Day>{props.date.weekday_short}</Day>
-        <div>
-            <img alt="weather" src={props.icon_url} />
-        </div>
-        <Temp low={true}>{props.low.fahrenheit}</Temp>
-        <Temp>{props.high.fahrenheit}</Temp>
-    </Wrapper>
-);
+}

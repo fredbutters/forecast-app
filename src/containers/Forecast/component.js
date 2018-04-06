@@ -1,16 +1,11 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Week as WeekDumb } from "../../components/Week";
+import { Forecast as ForecastDumb } from "../../components/Forecast";
 import * as actions from "./actions";
-// import { loadStart } from "./actions";
 
 const mapStateToProps = ({ weeklyForecast }) => ({
     weeklyForecast: weeklyForecast
 });
-
-// const mapStateToProps = state => ({
-//     ...state
-// });
 
 const mapDispatchToProps = dispatch => {
     const boundActionCreators = bindActionCreators(actions, dispatch);
@@ -18,4 +13,6 @@ const mapDispatchToProps = dispatch => {
     return allActions;
 };
 
-export const Week = connect(mapStateToProps, mapDispatchToProps)(WeekDumb);
+export const Forecast = connect(mapStateToProps, mapDispatchToProps)(
+    ForecastDumb
+);
