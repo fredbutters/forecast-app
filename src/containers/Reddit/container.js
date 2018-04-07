@@ -3,13 +3,17 @@ import { bindActionCreators } from "redux";
 import * as actions from "./actions";
 import { Reddit as RedditDumb } from "../../components/Reddit";
 
-const mapStateToProps = state => ({
-    data: state.reddit.data,
-    isLoading: state.reddit.isLoading,
-    subRedditText: state.reddit.subRedditText,
-    errorMessage: state.reddit.errorMessage,
-    isError: state.reddit.isError
-});
+const mapStateToProps = ({ reddit }) => {
+    let { data, isLoading, subRedditText, errorMessage, isError } = reddit;
+
+    return {
+        data,
+        isLoading,
+        subRedditText,
+        errorMessage,
+        isError
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     const boundActionCreators = bindActionCreators(actions, dispatch);

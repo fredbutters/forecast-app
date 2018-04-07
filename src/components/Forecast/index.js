@@ -1,5 +1,6 @@
 import React from "react";
-import glamorous from "glamorous";
+import glamorous, { Div, Span, Ul, Ol, Li, A, Input, H3 } from "glamorous";
+import { Container, Row, Col } from "glamorous-grid";
 import { ForecastItem } from "../ForecastItem";
 import Button from "../Button";
 
@@ -9,59 +10,65 @@ const Hourly = glamorous.div({}, ({ isVisible = false }) => ({
 
 export class Forecast extends React.Component {
     state = {
-        isHourlyVisible: false,
-        hourly: []
+        isHourlyVisible: false
     };
     componentWillMount = () => {
         this.props.loadStart();
     };
 
     showHourly = day => {
-        this.setState(prevState => ({
-            ...prevState,
-            isHourlyVisible: true,
-            hourly: this.props.hourly
-        }));
+        this.setState(
+            prevState => ({
+                ...prevState,
+                isHourlyVisible: true
+            }),
+            () => {
+                this.props.getHourlyStart();
+            }
+        );
     };
 
     hideHourly = e => {
         e.preventDefault();
         this.setState(prevState => ({
             ...prevState,
-            isHourlyVisible: false,
-            hourly: []
+            isHourlyVisible: false
         }));
     };
 
     render() {
         let { weeklyForecast } = this.props.weeklyForecast;
         return (
-            <div>
+            <Container>
                 {!weeklyForecast.length ? null : (
-                    <div>
-                        {weeklyForecast.map((item, i) => {
-                            return (
-                                <ForecastItem
-                                    {...item}
-                                    key={i}
-                                    handleClick={() =>
-                                        this.showHourly(item.date.day)
-                                    }
-                                />
-                            );
-                        })}
-                        <Hourly isVisible={this.state.isHourlyVisible}>
-                            Hourly stuff
-                            {this.state.hourly.map((item, i) => {
-                                return <div key={i}>test</div>;
+                    <Row>
+                        <Col>
+                            {weeklyForecast.map((item, i) => {
+                                return (
+                                    <ForecastItem
+                                        {...item}
+                                        key={i}
+                                        handleClick={() =>
+                                            this.showHourly(item.date.day)
+                                        }
+                                    />
+                                );
                             })}
-                            <Button type="secondary" onClick={this.hideHourly}>
-                                hide
-                            </Button>
-                        </Hourly>
-                    </div>
+                        </Col>
+                        <Col>
+                            <Hourly isVisible={this.state.isHourlyVisible}>
+                                Hourly stuff
+                                <Button
+                                    type="secondary"
+                                    onClick={this.hideHourly}
+                                >
+                                    hide
+                                </Button>
+                            </Hourly>
+                        </Col>
+                    </Row>
                 )}
-            </div>
+            </Container>
         );
     }
 }

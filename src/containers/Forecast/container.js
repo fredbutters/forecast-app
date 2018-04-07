@@ -3,8 +3,8 @@ import { bindActionCreators } from "redux";
 import { Forecast as ForecastDumb } from "../../components/Forecast";
 import * as actions from "./actions";
 
-const mapStateToProps = ({ weeklyForecast }) => ({
-    weeklyForecast: weeklyForecast
+const mapStateToProps = state => ({
+    weeklyForecast: state.weeklyForecast
 });
 
 const mapDispatchToProps = dispatch => {

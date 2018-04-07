@@ -1,4 +1,4 @@
 export * from "./epics";
-export * from "./component";
+export * from "./container";
 export * from "./actions";
 export * from "./reducer";

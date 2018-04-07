@@ -29,7 +29,7 @@ const App = () => (
     <Provider store={store}>
         <Wrapper
             css={{
-                backgroundColor: "lightblue",
+                backgroundColor: "#fff",
                 minHeight: "400px"
             }}
         >
