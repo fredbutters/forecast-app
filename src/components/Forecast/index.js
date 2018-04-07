@@ -37,7 +37,7 @@ export class Forecast extends React.Component {
     };
 
     render() {
-        let { weeklyForecast } = this.props.weeklyForecast;
+        let { weeklyForecast, hourly } = this.props.weeklyForecast;
         return (
             <Container>
                 {!weeklyForecast.length ? null : (
@@ -56,15 +56,24 @@ export class Forecast extends React.Component {
                             })}
                         </Col>
                         <Col>
-                            <Hourly isVisible={this.state.isHourlyVisible}>
-                                Hourly stuff
-                                <Button
-                                    type="secondary"
-                                    onClick={this.hideHourly}
-                                >
-                                    hide
-                                </Button>
-                            </Hourly>
+                            {!hourly.length ? null : (
+                                <Div>
+                                    {hourly.map((item, i) => {
+                                        return (
+                                            <Div key={i}>
+                                                {item.FCTTIME.civil}
+                                                <img src={item.icon_url} />
+                                            </Div>
+                                        );
+                                    })}
+                                    <Button
+                                        type="secondary"
+                                        onClick={this.hideHourly}
+                                    >
+                                        hide
+                                    </Button>
+                                </Div>
+                            )}
                         </Col>
                     </Row>
                 )}
