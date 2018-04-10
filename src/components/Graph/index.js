@@ -1,6 +1,6 @@
 import React from "react";
 import glamorous, { Div } from "glamorous";
-import { calculateSVGData } from "../../helpers";
+import { calculateSVGData, getLineSVG } from "../../helpers";
 
 //https://danielpataki.com/svg-chart/
 
@@ -14,9 +14,19 @@ export const Graph = ({ data }) => {
         });
     });
     let svgData = calculateSVGData(graphData);
-    let lineData = "";
     return (
-        <svg>
+        <svg width="700" height="150">
+            {svgData.map((coordinates, i) => {
+                return (
+                    <path
+                        key={i * 3}
+                        d={getLineSVG(svgData)}
+                        fill="none"
+                        stroke="#5cc0c0"
+                        strokeWidth="5"
+                    />
+                );
+            })}
             {svgData.map((coordinates, i) => {
                 return (
                     <circle
@@ -24,25 +34,24 @@ export const Graph = ({ data }) => {
                         cx={coordinates[0]}
                         cy={coordinates[1]}
                         r="4"
-                        fill="red"
-                        stroke="black"
+                        fill="#FFA500"
+                        stroke="#CC8400"
                         strokeWidth="2"
                     />
                 );
             })}
             {svgData.map((coordinates, i) => {
-                let command = i === 0 ? "M" : "L";
-                lineData = `${lineData} ${command} ${coordinates[0]}, ${
-                    coordinates[1]
-                }`;
                 return (
-                    <path
-                        key={i * 3}
-                        d={lineData}
-                        fill="none"
-                        stroke="#5cc0c0"
-                        strokeWidth="5"
-                    />
+                    <text
+                        key={i * 8}
+                        x={coordinates[0] - 10}
+                        y={coordinates[1] - 10}
+                        fontFamily="sans-serif"
+                        fontSize="20px"
+                        fill="#000"
+                    >
+                        {`${coordinates[2]}°`}
+                    </text>
                 );
             })}
         </svg>
