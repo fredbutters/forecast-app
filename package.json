@@ -15,6 +15,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "d3": "^5.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.11.6",
     "glamorous-grid": "^1.0.2",
