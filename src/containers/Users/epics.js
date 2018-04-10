@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { load, loadEnd, getUsers, getUsersEnd } from "./actions";
+import { load, loadEnd, getUsers, getUsersEnd, getUsersStart } from "./actions";
 
 export const loadUsers = (actions, store) => {
     return actions

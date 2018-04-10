@@ -38,7 +38,7 @@ export const epicHourly = (actions, store) =>
                 .mergeMap(({ response }) => {
                     const success = Observable.of(
                         getHourly({
-                            hourly: response.hourly_forecast
+                            hourly: response.hourly_forecast.slice(0, 7)
                         })
                     );
                     const end = Observable.of(getHourlyEnd());
