@@ -16,17 +16,12 @@ export const Graph = ({ data }) => {
     let svgData = calculateSVGData(graphData);
     return (
         <svg width="700" height="150">
-            {svgData.map((coordinates, i) => {
-                return (
-                    <path
-                        key={i * 3}
-                        d={getLineSVG(svgData)}
-                        fill="none"
-                        stroke="#5cc0c0"
-                        strokeWidth="5"
-                    />
-                );
-            })}
+            <path
+                d={getLineSVG(svgData)}
+                fill="none"
+                stroke="#5cc0c0"
+                strokeWidth="5"
+            />
             {svgData.map((coordinates, i) => {
                 return (
                     <circle

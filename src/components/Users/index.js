@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "../Button";
 import { theme } from "../../Providers/theme";
-import glamorous, { Div, Span, Ul, Ol, Li, A, Input, H3 } from "glamorous";
+import glamorous, { Ol, Li, H3 } from "glamorous";
 import { Container, Row, Col } from "glamorous-grid";
 import { InputCounter } from "../InputCounter";
 import UserInfo from "../UserInfo";
-import { Loading as WithLoader } from "../Loading";
+// import { Loading as WithLoader } from "../Loading";
 import { LoadingSpinner } from "../LoadingSpinner";
 
 const UserListItem = glamorous.span(
@@ -44,6 +44,7 @@ export class Users extends React.Component {
         this.props.getUsersStart();
     };
 
+    // this should be handled in the InputContainer
     handleIncrement = () => {
         let count = this.props.allUsers.userCount;
         let newValue = count >= 0 ? count : 0;
@@ -51,6 +52,7 @@ export class Users extends React.Component {
         this.props.setUserCount(newValue);
     };
 
+    // this should be handled in the InputContainer
     handleDecrement = () => {
         let count = this.props.allUsers.userCount;
         let newValue = count >= 0 ? count : 0;
