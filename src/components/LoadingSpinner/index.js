@@ -1,5 +1,5 @@
 import React from "react";
-import glamorous, { Span } from "glamorous";
+import glamorous from "glamorous";
 import FontAwesome from "react-fontawesome";
 
 const Loading = glamorous.span({}, ({ isVisible }) => ({

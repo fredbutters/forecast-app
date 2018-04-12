@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { load, loadStart, loadEnd, loadError } from "./actions";
+import { load, loadEnd, loadError } from "./actions";
 
 export const getPosts = (actions, store) => {
     return actions

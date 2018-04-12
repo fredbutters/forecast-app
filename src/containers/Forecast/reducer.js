@@ -1,20 +1,17 @@
+import produce from "immer";
 const initialState = { weeklyForecast: {}, hourly: {} };
 
-export const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "FORECAST_LOAD":
-            return {
-                ...state,
-                weeklyForecast: action.payload.week
-            };
-            break;
-        case "FORECAST_HOURLY":
-            return {
-                ...state,
-                hourly: action.payload.hourly
-            };
-            break;
-        default:
-            return state;
-    }
-};
+export const reducer = (state = initialState, action) =>
+    produce(state, draft => {
+        switch (action.type) {
+            case "FORECAST_LOAD":
+                draft.weeklyForecast = action.payload.week;
+                break;
+            case "FORECAST_HOURLY":
+                draft.hourly = action.payload.hourly;
+                break;
+            default:
+                return state;
+        }
+        return draft;
+    });

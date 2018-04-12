@@ -1,5 +1,5 @@
 import React from "react";
-import glamorous, { Div } from "glamorous";
+// import { Div } from "glamorous";
 import { calculateSVGData, getLineSVG } from "../../helpers";
 
 //https://danielpataki.com/svg-chart/

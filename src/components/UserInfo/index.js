@@ -13,7 +13,7 @@ const UserInfo = ({ user }) => {
             <H3 css={{ textTransform: "capitalize" }}>{`${user.name.first} ${
                 user.name.last
             }`}</H3>
-            <img src={user.picture.large} />
+            <img src={user.picture.large} alt="user profile" />
             <Ul>
                 <Li>
                     Username:<i>{user.login.username}</i>

@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../Button";
-import { theme } from "../../Providers/theme";
 import glamorous, { Ol, Li, H3 } from "glamorous";
 import { Container, Row, Col } from "glamorous-grid";
 import { InputCounter } from "../InputCounter";

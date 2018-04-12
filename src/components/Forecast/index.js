@@ -1,14 +1,9 @@
 import React from "react";
-import glamorous, { Div, Span, Ul, Ol, Li, A, Input, H3, Img } from "glamorous";
+import { Div } from "glamorous";
 import { Container, Row, Col } from "glamorous-grid";
 import { ForecastItem } from "../ForecastItem";
-import { Temp } from "../Temperature";
 import Button from "../Button";
 import { Graph } from "../Graph";
-
-const Hourly = glamorous.div({}, ({ isVisible = false }) => ({
-    display: isVisible ? "block" : "none"
-}));
 
 export class Forecast extends React.Component {
     state = {

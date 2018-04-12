@@ -1,5 +1,5 @@
 import React from "react";
-import glamorous, { Input, Button, Div } from "glamorous";
+import glamorous, { Input, Div } from "glamorous";
 import FontAwesome from "react-fontawesome";
 import { theme } from "../../Providers/theme";
 
@@ -13,7 +13,7 @@ const CounterButton = glamorous.button(
     })
 );
 
-const MinCountWarning = glamorous.div(
+const Warning = glamorous.div(
     {
         color: theme.color.danger
     },
@@ -23,19 +23,20 @@ const MinCountWarning = glamorous.div(
 );
 
 export class InputCounter extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         count: this.props.count,
         minCount: this.props.minCount || 1,
-        isCountWarning: false
+        isCountWarning: false,
+        isNaNWarning: false
     };
 
     handleIncrement = () => {
         this.setState(
-            { count: this.state.count + 1, isCountWarning: false },
+            {
+                count: this.state.count + 1,
+                isCountWarning: false,
+                isNaNWarning: false
+            },
             () => this.props.updateCount(this.state.count)
         );
     };
@@ -44,7 +45,8 @@ export class InputCounter extends React.Component {
         this.setState(
             {
                 count: Math.max(this.state.count - 1, this.state.minCount),
-                isCountWarning: false
+                isCountWarning: false,
+                isNaNWarning: false
             },
             () => this.props.updateCount(this.state.count)
         );
@@ -58,7 +60,11 @@ export class InputCounter extends React.Component {
             : Math.max(this.state.minCount, parseInt(val, 10));
 
         this.setState(
-            { count: newCount, isCountWarning: val <= this.state.minCount },
+            {
+                count: newCount,
+                isCountWarning: val <= this.state.minCount,
+                isNaNWarning: isNaN(val)
+            },
             () => this.props.updateCount(newCount)
         );
     }
@@ -85,9 +91,13 @@ export class InputCounter extends React.Component {
                 >
                     <FontAwesome name="minus" />
                 </CounterButton>
-                <MinCountWarning
-                    warn={this.state.isCountWarning}
-                >{`Minimum count: ${this.state.minCount}`}</MinCountWarning>
+                <Warning warn={this.state.isCountWarning}>
+                    Minimum count:
+                    {this.state.minCount}
+                </Warning>
+                <Warning warn={this.state.isNaNWarning}>
+                    That ain't no number!
+                </Warning>
             </Div>
         );
     }

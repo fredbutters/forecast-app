@@ -30,6 +30,8 @@ export const reducer = (state = initialState, action) =>
             case "SET_SUBREDDIT_TEXT":
                 draft.subRedditText = action.payload || "reactjs";
                 break;
+            default:
+                return draft;
         }
         return draft;
     });

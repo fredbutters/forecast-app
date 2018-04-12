@@ -30,6 +30,8 @@ export const reducer = (state = initialState, action) =>
             case "SET_USER_COUNT":
                 draft.userCount = action.payload;
                 break;
+            default:
+                return draft;
         }
         return draft;
     });
