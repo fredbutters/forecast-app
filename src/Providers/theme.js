@@ -8,7 +8,8 @@ export const theme = {
         secondary: colorSecondary,
         primary: colorPrimary,
         white: "#fff",
-        lightGray: "#ddd"
+        lightGray: "#ddd",
+        danger: "red"
     },
     gradient: {
         primary: `linear-gradient(to bottom, ${colorPrimary} 0, #036803 100%)`,

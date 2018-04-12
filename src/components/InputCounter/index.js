@@ -12,31 +12,15 @@ const CounterButton = glamorous.button(
         pointerEvents: isDisabled ? "none" : ""
     })
 );
-// export const InputCounter = props => {
-//     return (
-//         <Div css={props.wrapperCss}>
-//             <Input
-//                 css={{ padding: "5px", width: "100px" }}
-//                 type="text"
-//                 defaultValue={props.count}
-//                 value={props.count}
-//                 onChange={e => props.handleChange(e)}
-//             />
-//             <CounterButton
-//                 onClick={props.handleIncrement}
-//                 css={props.buttonCss}
-//             >
-//                 <FontAwesome name="plus" />
-//             </CounterButton>
-//             <CounterButton
-//                 onClick={props.handleDecrement}
-//                 css={props.buttonCss}
-//             >
-//                 <FontAwesome name="minus" />
-//             </CounterButton>
-//         </Div>
-//     );
-// };
+
+const MinCountWarning = glamorous.div(
+    {
+        color: theme.color.danger
+    },
+    ({ warn = false }) => ({
+        display: warn ? "block" : "none"
+    })
+);
 
 export class InputCounter extends React.Component {
     constructor(props) {
@@ -44,24 +28,38 @@ export class InputCounter extends React.Component {
     }
 
     state = {
-        count: this.props.count
+        count: this.props.count,
+        minCount: this.props.minCount || 1,
+        isCountWarning: false
     };
 
     handleIncrement = () => {
-        this.setState({ count: this.state.count + 1 }, () =>
-            this.props.updateCount(this.state.count)
+        this.setState(
+            { count: this.state.count + 1, isCountWarning: false },
+            () => this.props.updateCount(this.state.count)
         );
     };
 
     handleDecrement = () => {
-        this.setState({ count: Math.max(this.state.count - 1, 1) }, () =>
-            this.props.updateCount(this.state.count)
+        this.setState(
+            {
+                count: Math.max(this.state.count - 1, this.state.minCount),
+                isCountWarning: false
+            },
+            () => this.props.updateCount(this.state.count)
         );
     };
     handleChange(e) {
-        let newCount = e.target.value ? parseInt(e.target.value, 10) : 0;
-        this.setState({ count: newCount }, () =>
-            this.props.updateCount(newCount)
+        // input must be a number and greater than 0
+        // if input <= minCount, show warning
+        let val = e.target.value;
+        let newCount = isNaN(val)
+            ? this.state.minCount
+            : Math.max(this.state.minCount, parseInt(val, 10));
+
+        this.setState(
+            { count: newCount, isCountWarning: val <= this.state.minCount },
+            () => this.props.updateCount(newCount)
         );
     }
     render() {
@@ -87,6 +85,9 @@ export class InputCounter extends React.Component {
                 >
                     <FontAwesome name="minus" />
                 </CounterButton>
+                <MinCountWarning
+                    warn={this.state.isCountWarning}
+                >{`Minimum count: ${this.state.minCount}`}</MinCountWarning>
             </Div>
         );
     }
