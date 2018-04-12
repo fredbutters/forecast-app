@@ -13,7 +13,7 @@ export class Forecast extends React.Component {
         this.props.loadStart();
     };
 
-    showHourly = day => {
+    showHourly = () => {
         this.setState(
             prevState => ({
                 ...prevState,
@@ -42,16 +42,15 @@ export class Forecast extends React.Component {
                         <Row>
                             <Col>
                                 {weeklyForecast.map((item, i) => {
-                                    return (
-                                        <ForecastItem
-                                            {...item}
-                                            key={i}
-                                            handleClick={() =>
-                                                this.showHourly(item.date.day)
-                                            }
-                                        />
-                                    );
+                                    return <ForecastItem {...item} key={i} />;
                                 })}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button onClick={this.showHourly}>
+                                    Show Today's Hourly
+                                </Button>
                             </Col>
                         </Row>
                         <Row>

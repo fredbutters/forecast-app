@@ -15,6 +15,7 @@ const CounterButton = glamorous.button(
 
 const Warning = glamorous.div(
     {
+        marginBottom: "10px",
         color: theme.color.danger
     },
     ({ warn = false }) => ({
@@ -70,9 +71,13 @@ export class InputCounter extends React.Component {
     }
     render() {
         return (
-            <Div css={{ marginBottom: "10px" }}>
+            <Div>
                 <Input
-                    css={{ padding: "5px", width: "100px" }}
+                    css={{
+                        padding: "5px",
+                        width: "100px",
+                        marginBottom: "10px"
+                    }}
                     type="text"
                     defaultValue={this.props.count}
                     value={this.props.count}
@@ -93,10 +98,10 @@ export class InputCounter extends React.Component {
                 </CounterButton>
                 <Warning warn={this.state.isCountWarning}>
                     Minimum count:
-                    {this.state.minCount}
+                    {this.state.minCount}. I fixed it for you.
                 </Warning>
                 <Warning warn={this.state.isNaNWarning}>
-                    That ain't no number!
+                    That ain't no number! Try {this.state.minCount} instead
                 </Warning>
             </Div>
         );
