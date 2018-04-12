@@ -36,6 +36,17 @@ export const theme = {
                 borderColor: colorSecondaryHover,
                 backgroundColor: colorSecondaryHover
             }
+        },
+        disabled: {
+            backgroundImage: `linear-gradient(to bottom,#999  0%, #999 100%)`,
+            color: "#fff",
+            backgroundColor: colorSecondary,
+            border: "2px solid transparent",
+            ":hover": {
+                backgroundImage: `linear-gradient(to bottom, #999 0%, #999 100%)`,
+                borderColor: colorSecondaryHover,
+                backgroundColor: colorSecondaryHover
+            }
         }
     }
 };

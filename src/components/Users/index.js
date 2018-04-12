@@ -44,26 +44,6 @@ export class Users extends React.Component {
         this.props.getUsersStart();
     };
 
-    // this should be handled in the InputContainer
-    handleIncrement = () => {
-        let count = this.props.allUsers.userCount;
-        let newValue = count >= 0 ? count : 0;
-        newValue++;
-        this.props.setUserCount(newValue);
-    };
-
-    // this should be handled in the InputContainer
-    handleDecrement = () => {
-        let count = this.props.allUsers.userCount;
-        let newValue = count >= 0 ? count : 0;
-        newValue--;
-        this.props.setUserCount(newValue);
-    };
-
-    handleChange(e) {
-        this.props.setUserCount(e.target.value);
-    }
-
     render() {
         let { users, selectedUser, userCount } = this.props.allUsers;
 
@@ -104,11 +84,7 @@ export class Users extends React.Component {
                                 })}
                             </Ol>
                             <InputCounter
-                                wrapperCss={{ marginBottom: "10px" }}
-                                buttonCss={theme.button.primary}
-                                handleIncrement={() => this.handleIncrement()}
-                                handleDecrement={() => this.handleDecrement()}
-                                handleChange={e => this.handleChange(e)}
+                                updateCount={this.props.setUserCount}
                                 count={userCount}
                             />
                             <Button
