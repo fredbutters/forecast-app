@@ -1,27 +1,32 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Ul, Li, Div } from "glamorous";
+import { Ul, Div } from "glamorous";
 import { Users } from "./containers/Users";
 import { Home } from "./containers/Home";
 import { Reddit } from "./containers/Reddit";
 import { Forecast } from "./containers/Forecast";
+import glamorous from "glamorous";
 
+const Item = glamorous.li({
+    display: "inline-block",
+    marginLeft: "30px"
+});
 export const MyRouter = () => (
     <Router>
         <Div>
             <Ul>
-                <Li>
+                <Item>
                     <Link to="/">Home</Link>
-                </Li>
-                <Li>
+                </Item>
+                <Item>
                     <Link to="/users">Users</Link>
-                </Li>
-                <Li>
+                </Item>
+                <Item>
                     <Link to="/reddit">Reddit</Link>
-                </Li>
-                <Li>
+                </Item>
+                <Item>
                     <Link to="/forecast">Forecast</Link>
-                </Li>
+                </Item>
             </Ul>
             <Route exact path="/" component={Home} />
             <Route path="/users" component={Users} />

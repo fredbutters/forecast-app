@@ -22,31 +22,30 @@ export const Graph = ({ data }) => {
                 stroke="#5cc0c0"
                 strokeWidth="5"
             />
-            {svgData.map((coordinates, i) => {
+            {svgData.map((coords, i) => {
+                let posX = coords[0];
+                let posY = coords[1];
                 return (
-                    <circle
-                        key={i * 9}
-                        cx={coordinates[0]}
-                        cy={coordinates[1]}
-                        r="4"
-                        fill="#FFA500"
-                        stroke="#CC8400"
-                        strokeWidth="2"
-                    />
-                );
-            })}
-            {svgData.map((coordinates, i) => {
-                return (
-                    <text
-                        key={i * 8}
-                        x={coordinates[0] - 10}
-                        y={coordinates[1] - 10}
-                        fontFamily="sans-serif"
-                        fontSize="20px"
-                        fill="#000"
-                    >
-                        {`${coordinates[2]}°`}
-                    </text>
+                    <React.Fragment key={i * 9}>
+                        <circle
+                            cx={posX}
+                            cy={posY}
+                            r="4"
+                            fill="#FFA500"
+                            stroke="#CC8400"
+                            strokeWidth="2"
+                        />
+                        <text
+                            key={i * 8}
+                            x={posX - 10}
+                            y={posY - 10}
+                            fontFamily="sans-serif"
+                            fontSize="20px"
+                            fill="#000"
+                        >
+                            {`${coords[2]}°`}
+                        </text>
+                    </React.Fragment>
                 );
             })}
         </svg>

@@ -3,7 +3,7 @@ import { theme } from "../../Providers/theme";
 
 export default glamorous.button(
     {
-        display: "block",
+        display: "inline-block",
         border: "none",
         padding: "5px 10px",
         borderRadius: "5px",

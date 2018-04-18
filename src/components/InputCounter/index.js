@@ -31,6 +31,9 @@ export class InputCounter extends React.Component {
         isNaNWarning: false
     };
 
+    static defaultProps = {
+        minCount: 1
+    };
     handleIncrement = () => {
         this.setState(
             {
@@ -79,7 +82,6 @@ export class InputCounter extends React.Component {
                         marginBottom: "10px"
                     }}
                     type="text"
-                    defaultValue={this.props.count}
                     value={this.props.count}
                     onChange={e => this.handleChange(e)}
                 />
