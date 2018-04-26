@@ -27,22 +27,19 @@ const MyNavLink = glamorous(NavLink)({
         fontWeight: "bold"
     }
 });
-export const MyRouter = () => {
-    let selectedStyle = { fontWeight: "bold" };
-    return (
-        <Router>
-            <Div>
-                <MyNavLink to="/home">Home</MyNavLink>
-                <MyNavLink to="/users">Users</MyNavLink>
-                <MyNavLink to="/reddit">Reddit</MyNavLink>
-                <MyNavLink to="/forecast">Forecast</MyNavLink>
-                <Switch>
-                    <Route exact path="/home" component={Home} />
-                    <Route path="/users" component={Users} />
-                    <Route path="/reddit" component={Reddit} />
-                    <Route path="/forecast" component={Forecast} />
-                </Switch>
-            </Div>
-        </Router>
-    );
-};
+export const MyRouter = () => (
+    <Router>
+        <Div>
+            <MyNavLink to="/home">Home</MyNavLink>
+            <MyNavLink to="/users">Users</MyNavLink>
+            <MyNavLink to="/reddit">Reddit</MyNavLink>
+            <MyNavLink to="/forecast">Forecast</MyNavLink>
+            <Switch>
+                <Route exact path="/home" component={Home} />
+                <Route path="/users" component={Users} />
+                <Route path="/reddit" component={Reddit} />
+                <Route path="/forecast" component={Forecast} />
+            </Switch>
+        </Div>
+    </Router>
+);
