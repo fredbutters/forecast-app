@@ -16,7 +16,7 @@ export class Home extends React.Component {
         }));
     };
     submit = () => {
-        console.log("submit");
+        alert("submit form!");
     };
     render() {
         const { show } = this.props;

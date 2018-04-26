@@ -1,37 +1,48 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Ul, Div } from "glamorous";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    NavLink
+} from "react-router-dom";
 import { Users } from "./containers/Users";
 import { Home } from "./containers/Home";
 import { Reddit } from "./containers/Reddit";
 import { Forecast } from "./containers/Forecast";
-import glamorous from "glamorous";
+import glamorous, { Ul, Div } from "glamorous";
 
 const Item = glamorous.li({
     display: "inline-block",
     marginLeft: "30px"
 });
-export const MyRouter = () => (
-    <Router>
-        <Div>
-            <Ul>
-                <Item>
-                    <Link to="/">Home</Link>
-                </Item>
-                <Item>
-                    <Link to="/users">Users</Link>
-                </Item>
-                <Item>
-                    <Link to="/reddit">Reddit</Link>
-                </Item>
-                <Item>
-                    <Link to="/forecast">Forecast</Link>
-                </Item>
-            </Ul>
-            <Route exact path="/" component={Home} />
-            <Route path="/users" component={Users} />
-            <Route path="/reddit" component={Reddit} />
-            <Route path="/forecast" component={Forecast} />
-        </Div>
-    </Router>
-);
+
+const MyNavLink = glamorous(NavLink)({
+    display: "inline-block",
+    color: "#666",
+    marginRight: 20,
+    marginBottom: 20,
+    [".active"]: {
+        color: "#000",
+        fontWeight: "bold"
+    }
+});
+export const MyRouter = () => {
+    let selectedStyle = { fontWeight: "bold" };
+    return (
+        <Router>
+            <Div>
+                <MyNavLink to="/home">Home</MyNavLink>
+                <MyNavLink to="/users">Users</MyNavLink>
+                <MyNavLink to="/reddit">Reddit</MyNavLink>
+                <MyNavLink to="/forecast">Forecast</MyNavLink>
+                <Switch>
+                    <Route exact path="/home" component={Home} />
+                    <Route path="/users" component={Users} />
+                    <Route path="/reddit" component={Reddit} />
+                    <Route path="/forecast" component={Forecast} />
+                </Switch>
+            </Div>
+        </Router>
+    );
+};
